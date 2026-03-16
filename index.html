@@ -1,0 +1,159 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="color-scheme" content="light dark" />
+    <title>Annotation Design Considerations</title>
+    <link rel="stylesheet" href="assets/styles.css" />
+</head>
+
+<body>
+    <a href="#gallery" class="skip-link">Skip to gallery</a>
+    <header class="top" role="banner">
+        <div class="top__inner">
+            <div class="top__title">
+                <h1>Annotation Design Considerations</h1>
+                <p>
+                    Professional examples illustrating six interview-derived annotation design considerations.
+                    A visualization can map to multiple considerations. Use the filters to explore.
+                </p>
+            </div>
+
+            <div class="top__actions">
+                <div class="top__controls">
+                    <button id="openConsiderations" class="btn" type="button" aria-haspopup="dialog"
+                        aria-expanded="false" aria-controls="considerationsDrawer"><svg
+                            xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                            stroke-width="2" stroke-linecap="round" stroke-linejoin="round" width="13" height="13"
+                            aria-hidden="true"
+                            style="vertical-align:middle;margin-right:4px;opacity:0.76;flex-shrink:0">
+                            <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z" />
+                            <polyline points="14 2 14 8 20 8" />
+                            <line x1="16" y1="13" x2="8" y2="13" />
+                            <line x1="16" y1="17" x2="8" y2="17" />
+                        </svg>Design Considerations Details</button>
+                    <a id="supplementaryBtn" class="btn"
+                        href="https://osf.io/y5zw3/overview?view_only=91f4d45f6c1440138c4efac2ca011399" target="_blank"
+                        rel="noopener noreferrer"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"
+                            fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                            stroke-linejoin="round" width="13" height="13" aria-hidden="true"
+                            style="vertical-align:middle;margin-right:4px;opacity:0.76;flex-shrink:0">
+                            <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6" />
+                            <polyline points="15 3 21 3 21 9" />
+                            <line x1="10" y1="14" x2="21" y2="3" />
+                        </svg>Supplementary Materials</a>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <main role="main" class="layout">
+        <aside class="sidebar">
+            <section class="controls" aria-label="Filters">
+                <p class="controls__title">Annotation Design</p>
+                <button id="filterConsiderationsLabel" class="btn btn--primary" type="button" aria-haspopup="dialog"
+                    aria-controls="considerationsDrawer" aria-expanded="false">View Descriptions &amp;
+                    Illustrations</button>
+                <div class="filtersTop">
+                    <div class="filterGroup">
+                        <div class="filterSection__header">
+                            <p class="filterSection__label">Filter by Consideration</p>
+                            <div class="filterSection__subrow">
+                                <span id="stats" aria-live="polite">0 of 0</span>
+                                <button id="clearBtn" class="btn btn--clearFilter" type="button" hidden>Clear</button>
+                            </div>
+                        </div>
+                        <div id="considerationChips" class="chipRow" aria-label="Consideration filters"></div>
+                    </div>
+                </div>
+            </section>
+        </aside>
+        <div class="content wrap">
+            <section>
+                <div id="emptyState" class="empty" hidden>No figures match the current filters. Try clearing filters.
+                </div>
+                <div id="gallery" class="grid" aria-label="Figure gallery" tabindex="-1"></div>
+            </section>
+        </div>
+    </main>
+
+    <!-- Chart pop-out: shows the clicked figure alongside the drawer -->
+    <div id="chartPopout" class="chart-popout" hidden>
+        <div class="chart-popout__inner">
+            <p id="chartPopoutLabel" class="chart-popout__label"></p>
+            <img id="chartPopoutImg" class="chart-popout__img" alt="" />
+        </div>
+    </div>
+
+    <!-- Drawer for figure details -->
+    <div id="overlay" class="overlay" hidden></div>
+
+    <aside id="drawer" class="drawer" hidden role="dialog" aria-modal="true" aria-labelledby="drawerTitle">
+        <div class="drawer__header">
+            <div class="drawer__heading">
+                <h2 id="drawerTitle">Figure</h2>
+                <p id="drawerMeta" class="drawer__meta"></p>
+            </div>
+            <button id="drawerClose" class="iconBtn" type="button" aria-label="Close"><svg
+                    xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                    stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" width="14" height="14"
+                    aria-hidden="true">
+                    <line x1="18" y1="6" x2="6" y2="18" />
+                    <line x1="6" y1="6" x2="18" y2="18" />
+                </svg></button>
+        </div>
+        <div class="drawer__body">
+            <div class="drawer__imageBox"><img id="drawerImg" alt="" /></div>
+            <div class="panel">
+                <div class="panel__title">Why it fits</div>
+                <p id="drawerWhy" class="panel__text"></p>
+            </div>
+            <div class="panel">
+                <div class="panel__title">What to notice</div>
+                <ul id="drawerBullets" class="bullets"></ul>
+            </div>
+            <div class="panel">
+                <div class="panel__title">Per-consideration justification</div>
+                <div id="drawerPerC" class="perC"></div>
+            </div>
+            <div class="panel">
+                <div class="panel__title">Metadata</div>
+                <div id="drawerKV" class="kv"></div>
+            </div>
+            <div id="drawerCaveatBox" class="panel panel--caveat" hidden>
+                <div class="panel__title">Caveat</div>
+                <p id="drawerCaveat" class="panel__text"></p>
+            </div>
+        </div>
+    </aside>
+
+    <!-- Considerations pop-out drawer -->
+    <div id="overlayConsiderations" class="overlay" hidden></div>
+    <aside id="considerationsDrawer" class="drawer" hidden role="dialog" aria-modal="true"
+        aria-labelledby="considerationsTitle">
+        <div class="drawer__header">
+            <div class="drawer__heading">
+                <h2 id="considerationsTitle">Annotation Design Considerations</h2>
+            </div>
+            <button id="considerationsClose" class="iconBtn" type="button" aria-label="Close"><svg
+                    xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                    stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" width="14" height="14"
+                    aria-hidden="true">
+                    <line x1="18" y1="6" x2="6" y2="18" />
+                    <line x1="6" y1="6" x2="18" y2="18" />
+                </svg></button>
+        </div>
+        <div class="drawer__body" id="considerationsBody"></div>
+    </aside>
+
+    <!-- Data first -->
+    <script src="data/considerations.js"></script>
+    <script src="data/figures.js"></script>
+
+    <!-- App -->
+    <script src="assets/app.js" defer></script>
+</body>
+
+</html>
