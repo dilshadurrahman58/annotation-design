@@ -224,12 +224,23 @@ button {
 .top__inner {
   max-width: 1200px;
   margin: 0 auto;
-  padding: 28px 22px 22px;
+  padding: 24px 16px 18px 12px;
   display: flex;
   gap: 20px;
-  align-items: center;
+  align-items: flex-start;
   justify-content: space-between;
   flex-wrap: wrap;
+  position: relative;
+}
+
+.top__title {
+  max-width: min(760px, calc(100% - 360px));
+}
+
+.top__actions {
+  position: absolute;
+  top: 34px;
+  right: 16px;
 }
 
 /* skip link for accessibility */
@@ -264,6 +275,51 @@ button {
   -webkit-text-fill-color: transparent;
   background-clip: text;
 }
+.top__venue {
+  margin: 0 0 10px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--muted2);
+}
+.top__venue-name {
+  text-transform: none;
+}
+.top__venue-sep {
+  opacity: 0.5;
+}
+.top__read-paper {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  padding: 3px 10px;
+  border-radius: 6px;
+  border: 1px solid var(--border2);
+  background: var(--surface2);
+  color: var(--text);
+  text-decoration: none;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.07em;
+  text-transform: uppercase;
+  transition: background 0.15s, border-color 0.15s, color 0.15s;
+}
+.top__read-paper:hover {
+  background: var(--accent);
+  border-color: transparent;
+  color: #fff;
+}
+.top__authors {
+  margin: 6px 0 10px;
+  color: var(--muted);
+  font-size: 13px;
+  font-weight: 500;
+  letter-spacing: 0.01em;
+}
 .top__title p {
   margin: 0;
   color: var(--muted);
@@ -280,9 +336,15 @@ button {
 /* header CTA button group */
 .top__controls {
   display: flex;
-  gap: 10px;
-  flex-wrap: wrap;
+  gap: 8px;
+  flex-wrap: nowrap;
   align-items: center;
+}
+
+.top__controls .btn {
+  padding: 8px 10px;
+  font-size: 12.5px;
+  border-radius: 12px;
 }
 /* primary header action */
 .top__controls .btn:first-child {
@@ -293,7 +355,7 @@ button {
   );
   border-color: rgba(120, 148, 255, 0.38);
   font-weight: 600;
-  padding: 10px 16px;
+  padding: 8px 12px;
   letter-spacing: 0.005em;
 }
 .top__controls .btn:first-child:hover {
@@ -310,7 +372,7 @@ button {
   background: transparent;
   border-color: rgba(255, 255, 255, 0.1);
   color: var(--muted);
-  font-size: 13px;
+  font-size: 12px;
 }
 .top__controls .btn:last-child:hover {
   background: rgba(255, 255, 255, 0.04);
@@ -721,7 +783,7 @@ a.btn:active {
   display: flex;
   align-items: center;
   justify-content: center;
-  gap: 6px;
+  gap: 0;
   width: 100%;
   padding: 9px 14px;
   border-radius: 10px;
@@ -729,10 +791,12 @@ a.btn:active {
   text-align: center;
   letter-spacing: 0.01em;
 }
-.btn--primary::after {
-  content: "\2197";
-  font-size: 13px;
-  opacity: 0.7;
+.btn--primary svg {
+  flex-shrink: 0;
+  opacity: 0.78;
+  width: 17px;
+  height: 17px;
+  margin-right: -1px;
 }
 .btn--primary:hover {
   background: linear-gradient(
@@ -1234,6 +1298,22 @@ a.btn:active {
   gap: 16px;
 }
 @media (max-width: 980px) {
+  .top__inner {
+    padding-right: 12px;
+  }
+
+  .top__title {
+    max-width: calc(100% - 312px);
+  }
+
+  .top__controls {
+    gap: 8px;
+  }
+
+  .top__controls .btn {
+    padding: 7px 9px;
+  }
+
   .grid {
     grid-template-columns: repeat(2, minmax(0, 1fr));
   }
@@ -1246,6 +1326,30 @@ a.btn:active {
   }
 }
 @media (max-width: 620px) {
+  .top__inner {
+    padding: 16px 14px 14px;
+    gap: 12px;
+  }
+
+  .top__title {
+    max-width: 100%;
+  }
+
+  .top__actions {
+    position: static;
+    width: 100%;
+  }
+
+  .top__controls {
+    width: 100%;
+    flex-wrap: wrap;
+  }
+
+  .top__controls .btn {
+    flex: 1 1 auto;
+    justify-content: center;
+  }
+
   .grid {
     grid-template-columns: 1fr;
   }
